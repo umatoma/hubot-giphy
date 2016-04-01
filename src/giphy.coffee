@@ -2,13 +2,13 @@
 #   A hubot script that searching gif
 #
 # Configuration:
-#   LIST_OF_ENV_VARS_TO_SET
+#   HUBOT_GIPHY_API_KEY - "your prod api key"
 #
 # Commands:
 #   hubot gif me <query> - get a gif url at random
 #   hubot gif s|search <query> - search gifs by query
 
-giphy = require('giphy-api')();
+giphy = require('giphy-api')(process.env.HUBOT_GIPHY_API_KEY || null);
 
 module.exports = (robot) ->
   robot.respond /gif me (.+)/, (msg) ->
