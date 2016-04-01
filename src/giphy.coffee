@@ -5,17 +5,22 @@
 #   LIST_OF_ENV_VARS_TO_SET
 #
 # Commands:
-#   hubot gif s|search <query> - <what the respond trigger does>
-#
-# Notes:
-#   <optional notes required for the script>
-#
-# Author:
-#   umatoma[@<org>]
+#   hubot gif me <query> - get a gif url at random
+#   hubot gif s|search <query> - search gifs by query
 
 giphy = require('giphy-api')();
 
 module.exports = (robot) ->
+  robot.respond /gif me (.+)/, (msg) ->
+    tag = msg.match[1]
+    giphy.random tag, (err, res) ->
+      if err
+        robot.logger.error err
+        msg.send err.message
+      else
+        robot.logger.debug res
+        msg.send res.data.image_url
+
   robot.respond /gif (?:s|search) (.+)/, (msg) ->
     query = msg.match[1]
     option =
