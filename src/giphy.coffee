@@ -5,8 +5,7 @@
 #   LIST_OF_ENV_VARS_TO_SET
 #
 # Commands:
-#   hubot hello - <what the respond trigger does>
-#   orly - <what the hear trigger does>
+#   hubot gif s|search <query> - <what the respond trigger does>
 #
 # Notes:
 #   <optional notes required for the script>
@@ -14,9 +13,19 @@
 # Author:
 #   umatoma[@<org>]
 
-module.exports = (robot) ->
-  robot.respond /hello/, (msg) ->
-    msg.reply "hello!"
+giphy = require('giphy-api')();
 
-  robot.hear /orly/, ->
-    msg.send "yarly"
+module.exports = (robot) ->
+  robot.respond /gif (?:s|search) (.+)/, (msg) ->
+    query = msg.match[1]
+    option =
+      q: query
+      limit: 5
+    giphy.search option, (err, res) ->
+      if err
+        robot.logger.error err
+        msg.send err.message
+      else
+        robot.logger.debug res
+        urls = res.data.map (item) -> item.images.original.url
+        msg.send "【#{query}】gifs\n#{urls.join('\n')}"
