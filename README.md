@@ -23,7 +23,7 @@ user> hubot gif me cat
 hubot> http://media0.giphy.com/media/WJK2SABYwvEvm/giphy.gif
 
 user> hubot gif search cat
-hubot> 【cat】gifs
+hubot> search "cat" gifs
 http://media3.giphy.com/media/NGxO35FivioMw/giphy.gif
 http://media0.giphy.com/media/xThuWpnG8UOeTmFVmg/giphy.gif
 http://media1.giphy.com/media/LBfxm5kmwEyRy/giphy.gif
