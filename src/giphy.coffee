@@ -33,4 +33,4 @@ module.exports = (robot) ->
       else
         robot.logger.debug res
         urls = res.data.map (item) -> item.images.original.url
-        msg.send "【#{query}】gifs\n#{urls.join('\n')}"
+        msg.send "search \"#{query}\" gifs\n#{urls.join('\n')}"
